@@ -1,8 +1,7 @@
-import React from 'react';
-import { motion } from 'framer-motion';
+import React, { useState, useEffect } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import { 
   Github, 
-  Linkedin, 
   Twitter, 
   Instagram, 
   Mail, 
@@ -10,187 +9,267 @@ import {
   TerminalSquare, 
   Database,
   PieChart,
-  Brain,
+  BrainCircuit,
   Dumbbell,
-  Moon,
-  ArrowRight,
-  FolderOpen,
-  Globe
+  MoonStar,
+  ArrowUpRight,
+  FolderTree,
+  Globe,
+  ChevronRight,
+  Sparkles
 } from 'lucide-react';
 
 const repositoryData = [
   {
     title: "Banking System",
-    description: "A robust OOP simulation of a bank offering account creation, secure deposits, withdrawals, and balance tracking.",
+    description: "Robust OOP simulation of a bank offering secure account creation, deposits, withdrawals, and balance tracking.",
     folder: "Mini Project(Banking System)",
-    icon: <Database size={28} />,
+    icon: <Database size={24} />,
     color: "#10b981", 
-    link: "https://github.com/ayushkumarjena15/Advance-Python-TNP/tree/main/Mini%20Project(Banking%20System)"
+    gradient: "from-emerald-500 to-teal-400",
+    link: "https://github.com/ayushkumarjena15/Advance-Python-TNP/tree/main/Mini%20Project(Banking%20System)",
+    tags: ["OOP", "Classes", "Simulation"]
   },
   {
     title: "Student Analyser",
-    description: "A Python data-processing system that analyzes student marks, calculates aggregate performances, and generates grade reports.",
+    description: "Powerful data-processing engine that analyzes marks, calculates aggregate performances, and generates grade reports.",
     folder: "Mini Project(Student Performance Analyser)",
-    icon: <PieChart size={28} />,
+    icon: <PieChart size={24} />,
     color: "#6366f1", 
-    link: "https://github.com/ayushkumarjena15/Advance-Python-TNP/tree/main/Mini%20Project(Student%20Performance%20Analyser)"
+    gradient: "from-indigo-500 to-blue-400",
+    link: "https://github.com/ayushkumarjena15/Advance-Python-TNP/tree/main/Mini%20Project(Student%20Performance%20Analyser)",
+    tags: ["Data Processing", "Algorithms"]
   },
   {
-    title: "Python Assessments",
-    description: "15 intensive logical and algorithm-based challenges simulating interview environments, focusing on Data Structures and Loops.",
+    title: "Logic Assessments",
+    description: "15 intensive algorithmic challenges simulating technical interview environments focusing on core data structures.",
     folder: "Python Assessment",
-    icon: <Brain size={28} />,
+    icon: <BrainCircuit size={24} />,
     color: "#f43f5e", 
-    link: "https://github.com/ayushkumarjena15/Advance-Python-TNP/tree/main/Python%20Assessment"
+    gradient: "from-rose-500 to-pink-400",
+    link: "https://github.com/ayushkumarjena15/Advance-Python-TNP/tree/main/Python%20Assessment",
+    tags: ["DSA", "Logic", "Interviews"]
   },
   {
-    title: "Practice Modules",
-    description: "5 dedicated directories acting as a daily brain-gym. Contains logic exercises on Tuple Unpacking, Comprehensions, and Sorting.",
-    folder: "Practice-1 to 5",
-    icon: <Dumbbell size={28} />,
+    title: "Daily Practice Gym",
+    description: "5 dedicated directories for keeping syntax sharp. Focuses on tuple unpacking, comprehensions, and nested loops.",
+    folder: "Practice Modules",
+    icon: <Dumbbell size={24} />,
     color: "#f59e0b", 
-    link: "https://github.com/ayushkumarjena15/Advance-Python-TNP"
+    gradient: "from-amber-500 to-orange-400",
+    link: "https://github.com/ayushkumarjena15/Advance-Python-TNP",
+    tags: ["Syntax", "Loops", "Comprehensions"]
   },
   {
-    title: "Evening Work",
+    title: "Evening Sessions",
     description: "Core logic scripts engineered during strictly scheduled deep-work evening python programming sessions.",
     folder: "Evening session Work",
-    icon: <Moon size={28} />,
-    color: "#8b5cf6", 
-    link: "https://github.com/ayushkumarjena15/Advance-Python-TNP/tree/main/Evening%20session%20Work"
+    icon: <MoonStar size={24} />,
+    color: "#a855f7", 
+    gradient: "from-purple-500 to-fuchsia-400",
+    link: "https://github.com/ayushkumarjena15/Advance-Python-TNP/tree/main/Evening%20session%20Work",
+    tags: ["Deep Work", "Core Python"]
   },
   {
-    title: "Core Mechanics",
-    description: "Standalone scripts emphasizing core language behavior such as Global/Local Scoping, List Operations, & Functional Programming.",
-    folder: "Root Scripts",
-    icon: <Code2 size={28} />,
-    color: "#38bdf8", 
-    link: "https://github.com/ayushkumarjena15/Advance-Python-TNP/blob/main/Global.py"
+    title: "Root Mechanics",
+    description: "Standalone architecture scripts emphasizing local scoping, list operations, and lambda functional programming.",
+    folder: "Root Level Scripts",
+    icon: <Code2 size={24} />,
+    color: "#0ea5e9", 
+    gradient: "from-sky-500 to-cyan-400",
+    link: "https://github.com/ayushkumarjena15/Advance-Python-TNP/blob/main/Global.py",
+    tags: ["Functions", "Scoping"]
   }
 ];
 
-const containerVariants = {
+// --- Animation Variants ---
+const staggerContainer = {
   hidden: { opacity: 0 },
-  visible: {
+  show: {
     opacity: 1,
-    transition: { staggerChildren: 0.15 }
+    transition: { staggerChildren: 0.1, delayChildren: 0.2 }
   }
 };
 
-const itemVariants = {
-  hidden: { y: 30, opacity: 0 },
-  visible: {
-    y: 0,
-    opacity: 1,
-    transition: { type: "spring", stiffness: 100, damping: 15 }
+const fadeUp = {
+  hidden: { y: 40, opacity: 0 },
+  show: { 
+    y: 0, 
+    opacity: 1, 
+    transition: { type: "spring", stiffness: 80, damping: 20 } 
   }
+};
+
+const scaleIn = {
+  hidden: { scale: 0.9, opacity: 0 },
+  show: { 
+    scale: 1, 
+    opacity: 1, 
+    transition: { type: "spring", stiffness: 100, damping: 15 } 
+  }
+};
+
+// --- Custom Mouse Tracker Component ---
+const MouseGlow = () => {
+  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+
+  useEffect(() => {
+    const updateMousePosition = (e) => {
+      setMousePosition({ x: e.clientX, y: e.clientY });
+    };
+    window.addEventListener('mousemove', updateMousePosition);
+    return () => window.removeEventListener('mousemove', updateMousePosition);
+  }, []);
+
+  return (
+    <motion.div
+      className="mouse-glow"
+      animate={{
+        x: mousePosition.x - 400,
+        y: mousePosition.y - 400,
+      }}
+      transition={{ type: "tween", ease: "backOut", duration: 0.5 }}
+    />
+  );
 };
 
 export default function App() {
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => setScrolled(window.scrollY > 50);
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
   return (
     <div className="app-container">
+      <MouseGlow />
+      
+      {/* Dynamic Background */}
+      <div className="bg-grid"></div>
+      <div className="bg-gradient-sphere bg-sphere-1"></div>
+      <div className="bg-gradient-sphere bg-sphere-2"></div>
       
       {/* Header */}
       <motion.header 
-        className="header"
+        className={`header ${scrolled ? 'header-scrolled' : ''}`}
         initial={{ y: -100, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
-        transition={{ type: "spring", stiffness: 100, damping: 20 }}
+        transition={{ type: "spring", stiffness: 100, damping: 20, delay: 0.1 }}
       >
         <nav className="navbar max-w-container">
           <motion.div 
-            className="logo"
+            className="logo group"
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
           >
-            <TerminalSquare size={28} color="#facc15" />
-            <span>Py<span className="highlight">Mastery</span></span>
+            <div className="logo-icon-wrapper">
+              <TerminalSquare size={24} className="text-yellow-400 group-hover:rotate-12 transition-transform duration-300" />
+            </div>
+            <span className="logo-text">Py<span className="text-gradient">Mastery</span></span>
           </motion.div>
           
           <div className="social-links">
-            <motion.a whileHover={{ y: -5 }} href="https://www.ayushkumarjena.in/" target="_blank" rel="noreferrer" className="social-icon" aria-label="Portfolio">
-              <Globe size={18} />
-            </motion.a>
-            <motion.a whileHover={{ y: -5 }} href="https://github.com/ayushkumarjena15" target="_blank" rel="noreferrer" className="social-icon" aria-label="Github">
-              <Github size={18} />
-            </motion.a>
-            <motion.a whileHover={{ y: -5 }} href="https://x.com/ayushkumarjena15" target="_blank" rel="noreferrer" className="social-icon" aria-label="X">
-              <Twitter size={18} />
-            </motion.a>
-            <motion.a whileHover={{ y: -5 }} href="https://www.instagram.com/ig_ayush099/?hl=en" target="_blank" rel="noreferrer" className="social-icon" aria-label="Instagram">
-              <Instagram size={18} />
-            </motion.a>
-            <motion.a whileHover={{ y: -5 }} href="mailto:ayushkumarjena15@gmail.com" className="social-icon" aria-label="Email">
-              <Mail size={18} />
-            </motion.a>
+            {[
+              { icon: <Globe size={18} />, href: "https://www.ayushkumarjena.in/", label: "Portfolio" },
+              { icon: <Github size={18} />, href: "https://github.com/ayushkumarjena15", label: "Github" },
+              { icon: <Twitter size={18} />, href: "https://x.com/ayushkumarjena15", label: "Twitter" },
+              { icon: <Instagram size={18} />, href: "https://www.instagram.com/ig_ayush099/?hl=en", label: "Instagram" },
+              { icon: <Mail size={18} />, href: "mailto:ayushkumarjena15@gmail.com", label: "Email" }
+            ].map((link, i) => (
+              <motion.a 
+                key={i}
+                href={link.href}
+                target="_blank" 
+                rel="noreferrer" 
+                className="social-icon"
+                aria-label={link.label}
+                whileHover={{ y: -5, scale: 1.1, backgroundColor: "rgba(255,255,255,0.1)" }}
+                whileTap={{ scale: 0.9 }}
+                initial={{ opacity: 0, y: -20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.2 + (i * 0.1) }}
+              >
+                {link.icon}
+              </motion.a>
+            ))}
           </div>
         </nav>
       </motion.header>
 
-      <main className="max-w-container">
-        {/* Hero Section */}
+      <main className="max-w-container main-content">
+        {/* Advanced Hero Section */}
         <section className="hero">
           <motion.div 
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.5 }}
-            className="hero-badge"
+            variants={staggerContainer}
+            initial="hidden"
+            animate="show"
+            className="hero-content"
           >
-            <Code2 size={16} /> Advanced Python TNP Showcase
-          </motion.div>
-          
-          <motion.h1 
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.1 }}
-            className="hero-title"
-          >
-            Mastering Python, <br/> <span className="highlight">One Script At A Time.</span>
-          </motion.h1>
-          
-          <motion.p 
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.2 }}
-            className="hero-subtitle"
-          >
-            A comprehensive vault of advanced Python scripts, object-oriented systems, 
-            and logical assessments tailored for high-performance engineering. Built by <b>Ayush Kumar Jena</b>.
-          </motion.p>
-          
-          <motion.div 
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.3 }}
-            className="hero-buttons"
-          >
-            <a href="https://github.com/ayushkumarjena15/Advance-Python-TNP" target="_blank" rel="noreferrer" className="btn btn-primary">
-              <Github size={20} /> View on GitHub
-            </a>
-            <a href="#explore" className="btn btn-secondary">
-              Explore Scripts
-            </a>
+            <motion.div variants={fadeUp} className="badge-wrapper">
+              <span className="hero-badge">
+                <Sparkles size={16} className="text-yellow-400" /> 
+                <span className="tracking-wide">PREMIUM WORKSPACE SHOWCASE</span>
+              </span>
+            </motion.div>
+            
+            <motion.h1 variants={fadeUp} className="hero-title">
+              Engineering with <br/> 
+              <span className="hero-title-gradient">Advanced Python.</span>
+            </motion.h1>
+            
+            <motion.p variants={fadeUp} className="hero-subtitle">
+              A meticulously curated algorithmic vault of scripts, complex object-oriented systems, 
+              and technical data assessments. Crafted for high-performance scale by <strong className="text-white">Ayush Kumar Jena</strong>.
+            </motion.p>
+            
+            <motion.div variants={fadeUp} className="hero-cta">
+              <motion.a 
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                href="https://github.com/ayushkumarjena15/Advance-Python-TNP" 
+                target="_blank" 
+                rel="noreferrer" 
+                className="btn-primary-glow"
+              >
+                <Github size={20} /> Inspect Repository
+              </motion.a>
+              <motion.a 
+                whileHover={{ scale: 1.05, backgroundColor: "rgba(255,255,255,0.08)" }}
+                whileTap={{ scale: 0.95 }}
+                href="#architecture" 
+                className="btn-secondary-glass"
+              >
+                View Architecture <ChevronRight size={18} className="btn-arrow" />
+              </motion.a>
+            </motion.div>
           </motion.div>
         </section>
 
-        {/* Dynamic Interactive Grid */}
-        <section id="explore">
+        {/* High-Tech Grid Layout */}
+        <section id="architecture" className="architecture-section">
           <motion.div 
-            initial={{ opacity: 0, x: -20 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-100px" }}
             className="section-header"
           >
-            <FolderOpen color="#38bdf8" size={36} /> 
-            <span>Directory Analysis</span>
+            <div className="section-icon-box">
+              <FolderTree color="#facc15" size={28} />
+            </div>
+            <div>
+              <h2 className="section-title">Directory Architecture</h2>
+              <p className="section-desc">Explore the modular folder structure of the repository.</p>
+            </div>
           </motion.div>
 
           <motion.div 
-            className="grid-container"
-            variants={containerVariants}
+            className="bento-grid"
+            variants={staggerContainer}
             initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, margin: "-100px" }}
+            whileInView="show"
+            viewport={{ once: true, margin: "-50px" }}
           >
             {repositoryData.map((data, idx) => (
               <motion.a 
@@ -198,25 +277,40 @@ export default function App() {
                 target="_blank" 
                 rel="noreferrer"
                 key={idx} 
-                className="folder-card"
-                variants={itemVariants}
-                whileHover={{ scale: 1.02 }}
-                whileTap={{ scale: 0.98 }}
+                className="bento-card group"
+                variants={scaleIn}
+                whileHover={{ y: -8 }}
               >
-                <div 
-                  className="card-icon-wrapper" 
-                  style={{ color: data.color, background: `${data.color}15` }}
-                >
-                  {data.icon}
-                </div>
-                <h3 className="card-title">{data.title}</h3>
-                <p className="card-desc">{data.description}</p>
+                {/* Glowing Hover Effect */}
+                <div className="bento-glow group-hover:opacity-100" style={{ backgroundImage: `radial-gradient(circle at 50% 0%, ${data.color}33, transparent 70%)` }}></div>
                 
-                <div className="card-footer">
-                  <span className="card-badge" style={{ color: data.color, background: `${data.color}10` }}>
-                    <FolderOpen size={14} /> {data.folder}
-                  </span>
-                  <ArrowRight size={18} className="card-arrow" />
+                <div className="bento-content">
+                  <header className="bento-header">
+                    <div 
+                      className="bento-icon" 
+                      style={{ color: data.color, backgroundColor: `${data.color}15`, border: `1px solid ${data.color}30` }}
+                    >
+                      {data.icon}
+                    </div>
+                    <ArrowUpRight size={22} className="bento-arrow" style={{ color: data.color }} />
+                  </header>
+                  
+                  <div className="bento-body">
+                    <h3 className="bento-title">{data.title}</h3>
+                    <p className="bento-desc">{data.description}</p>
+                    
+                    <div className="bento-tags">
+                      {data.tags.map((tag, t) => (
+                        <span key={t} className="bento-tag">{tag}</span>
+                      ))}
+                    </div>
+                  </div>
+                  
+                  <footer className="bento-footer">
+                    <span className="bento-folder">
+                      <TerminalSquare size={14} className="mr-2 opacity-50" /> {data.folder}
+                    </span>
+                  </footer>
                 </div>
               </motion.a>
             ))}
@@ -224,16 +318,23 @@ export default function App() {
         </section>
       </main>
 
-      {/* Footer */}
+      {/* Premium Footer */}
       <footer className="footer">
-        <div className="max-w-container">
-          <div className="footer-text">
-            Built with <span style={{color: '#ff3366'}}>❤</span> by <strong>Ayush Kumar Jena</strong>
+        <div className="max-w-container footer-content">
+          <div className="footer-glow"></div>
+          <motion.div 
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            className="footer-text"
+          >
+            Engineered with <motion.span animate={{ scale: [1, 1.2, 1] }} transition={{ repeat: Infinity, duration: 2 }} style={{ color: '#f43f5e', margin: '0 6px', display: 'inline-block' }}>❤</motion.span> by <strong className="text-white ml-1">Ayush Kumar Jena</strong>
+          </motion.div>
+          <div className="footer-tech">
+            <span>React.js</span> <span className="dot">•</span> <span>Framer Motion</span> <span className="dot">•</span> <span>Vite</span>
           </div>
-          <div className="footer-subtext">Powered by React.js & Framer Motion</div>
         </div>
       </footer>
-      
     </div>
   );
 }
