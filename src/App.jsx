@@ -177,7 +177,7 @@ export default function App() {
               { icon: <Github size={18} />, href: "https://github.com/ayushkumarjena15", label: "Github" },
               { icon: <Twitter size={18} />, href: "https://x.com/ayushkumarjena15", label: "Twitter" },
               { icon: <Instagram size={18} />, href: "https://www.instagram.com/ig_ayush099/?hl=en", label: "Instagram" },
-              { icon: <Mail size={18} />, href: "mailto:ayushkumarjena15@gmail.com", label: "Email" }
+              { icon: <Mail size={18} />, href: "mailto:ahalyajena28@gmail.com", label: "Email" }
             ].map((link, i) => (
               <motion.a 
                 key={i}
@@ -335,7 +335,7 @@ export default function App() {
               <motion.a 
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                href="https://topmate.io/ayushkumarjena15" 
+                href="https://www.ayushkumarjena.in/book" 
                 target="_blank" 
                 rel="noreferrer" 
                 className="btn-primary-glow"
@@ -345,7 +345,7 @@ export default function App() {
               <motion.a 
                 whileHover={{ scale: 1.05, backgroundColor: "rgba(255,255,255,0.08)" }}
                 whileTap={{ scale: 0.95 }}
-                href="mailto:ayushkumarjena15@gmail.com" 
+                href="mailto:ahalyajena28@gmail.com" 
                 className="btn-secondary-glass"
               >
                 <Mail size={20} /> Drop an Email
