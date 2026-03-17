@@ -6,10 +6,10 @@
 
 <img src="https://capsule-render.vercel.app/api?type=waving&color=gradient&height=250&section=header&text=Advance%20Python%20TNP&fontSize=70&fontAlignY=35&desc=Mastering%20Python,%20One%20Script%20At%20A%20Time&descAlignY=55&descAlign=50" width="100%" />
 
-[![Portfolio](https://img.shields.io/badge/Portfolio-%23000000.svg?style=for-the-badge&logo=firefox&logoColor=#FF7139)](https://github.com/ayushkumarjena15)
+[![Portfolio](https://img.shields.io/badge/Portfolio-%23000000.svg?style=for-the-badge&logo=firefox&logoColor=#FF7139)](https://www.ayushkumarjena.in/v)
 [![LinkedIn](https://img.shields.io/badge/linkedin-%230077B5.svg?style=for-the-badge&logo=linkedin&logoColor=white)](https://linkedin.com)
 [![X](https://img.shields.io/badge/X-Black.svg?style=for-the-badge&logo=X&logoColor=white)](https://x.com/ayushkumarjena15)
-[![Instagram](https://img.shields.io/badge/Instagram-%23E4405F.svg?style=for-the-badge&logo=Instagram&logoColor=white)](https://instagram.com/ayushkumarjena15)
+[![Instagram](https://img.shields.io/badge/Instagram-%23E4405F.svg?style=for-the-badge&logo=Instagram&logoColor=white)](https://www.instagram.com/ig_ayush099/?hl=en)
 [![LeetCode](https://img.shields.io/badge/LeetCode-FFA116?style=for-the-badge&logo=LeetCode&logoColor=black)](https://leetcode.com/ayushkumarjena15)
 [![Email](https://img.shields.io/badge/Email-D14836?style=for-the-badge&logo=gmail&logoColor=white)](mailto:ayushkumarjena15@gmail.com)
 
