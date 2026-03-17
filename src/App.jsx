@@ -16,7 +16,8 @@ import {
   FolderTree,
   Globe,
   ChevronRight,
-  Sparkles
+  Sparkles,
+  Phone
 } from 'lucide-react';
 
 const repositoryData = [
@@ -316,6 +317,43 @@ export default function App() {
             ))}
           </motion.div>
         </section>
+
+        {/* Brand New Connect / Collaborate CTA Section */}
+        <section id="contact" className="cta-section">
+          <motion.div 
+            initial={{ opacity: 0, scale: 0.95 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true }}
+            className="cta-card"
+          >
+            <div className="cta-glow"></div>
+            <h2 className="cta-title">Interested in Collaborating?</h2>
+            <p className="cta-desc">
+              I'm always open to discussing new projects, creative ideas, or opportunities to be part of your vision. Let's connect!
+            </p>
+            <div className="cta-buttons">
+              <motion.a 
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                href="https://topmate.io/ayushkumarjena15" 
+                target="_blank" 
+                rel="noreferrer" 
+                className="btn-primary-glow"
+              >
+                <Phone size={20} /> Book a Call
+              </motion.a>
+              <motion.a 
+                whileHover={{ scale: 1.05, backgroundColor: "rgba(255,255,255,0.08)" }}
+                whileTap={{ scale: 0.95 }}
+                href="mailto:ayushkumarjena15@gmail.com" 
+                className="btn-secondary-glass"
+              >
+                <Mail size={20} /> Drop an Email
+              </motion.a>
+            </div>
+          </motion.div>
+        </section>
+
       </main>
 
       {/* Premium Footer */}
@@ -328,11 +366,8 @@ export default function App() {
             viewport={{ once: true }}
             className="footer-text"
           >
-            Engineered with <motion.span animate={{ scale: [1, 1.2, 1] }} transition={{ repeat: Infinity, duration: 2 }} style={{ color: '#f43f5e', margin: '0 6px', display: 'inline-block' }}>❤</motion.span> by <strong className="text-white ml-1">Ayush Kumar Jena</strong>
+            Built with <motion.span animate={{ scale: [1, 1.2, 1] }} transition={{ repeat: Infinity, duration: 2 }} style={{ color: '#f43f5e', margin: '0 6px', display: 'inline-block' }}>❤</motion.span> by <strong className="text-white ml-1">Ayush Kumar Jena</strong>
           </motion.div>
-          <div className="footer-tech">
-            <span>React.js</span> <span className="dot">•</span> <span>Framer Motion</span> <span className="dot">•</span> <span>Vite</span>
-          </div>
         </div>
       </footer>
     </div>
