@@ -91,31 +91,41 @@ export default function App() {
     <div className="app-container">
       
       {/* Header */}
-      <header className="header">
+      <motion.header 
+        className="header"
+        initial={{ y: -100, opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
+        transition={{ type: "spring", stiffness: 100, damping: 20 }}
+      >
         <nav className="navbar max-w-container">
-          <div className="logo">
+          <motion.div 
+            className="logo"
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+          >
             <TerminalSquare size={28} color="#facc15" />
             <span>Py<span className="highlight">Mastery</span></span>
-          </div>
+          </motion.div>
+          
           <div className="social-links">
-            <a href="https://www.ayushkumarjena.in/v" target="_blank" rel="noreferrer" className="social-icon" aria-label="Portfolio">
+            <motion.a whileHover={{ y: -5 }} href="https://www.ayushkumarjena.in/" target="_blank" rel="noreferrer" className="social-icon" aria-label="Portfolio">
               <Globe size={18} />
-            </a>
-            <a href="https://github.com/ayushkumarjena15" target="_blank" rel="noreferrer" className="social-icon" aria-label="Github">
+            </motion.a>
+            <motion.a whileHover={{ y: -5 }} href="https://github.com/ayushkumarjena15" target="_blank" rel="noreferrer" className="social-icon" aria-label="Github">
               <Github size={18} />
-            </a>
-            <a href="https://x.com/ayushkumarjena15" target="_blank" rel="noreferrer" className="social-icon" aria-label="X">
+            </motion.a>
+            <motion.a whileHover={{ y: -5 }} href="https://x.com/ayushkumarjena15" target="_blank" rel="noreferrer" className="social-icon" aria-label="X">
               <Twitter size={18} />
-            </a>
-            <a href="https://www.instagram.com/ig_ayush099/?hl=en" target="_blank" rel="noreferrer" className="social-icon" aria-label="Instagram">
+            </motion.a>
+            <motion.a whileHover={{ y: -5 }} href="https://www.instagram.com/ig_ayush099/?hl=en" target="_blank" rel="noreferrer" className="social-icon" aria-label="Instagram">
               <Instagram size={18} />
-            </a>
-            <a href="mailto:ayushkumarjena15@gmail.com" className="social-icon" aria-label="Email">
+            </motion.a>
+            <motion.a whileHover={{ y: -5 }} href="mailto:ayushkumarjena15@gmail.com" className="social-icon" aria-label="Email">
               <Mail size={18} />
-            </a>
+            </motion.a>
           </div>
         </nav>
-      </header>
+      </motion.header>
 
       <main className="max-w-container">
         {/* Hero Section */}
